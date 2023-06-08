@@ -1,0 +1,51 @@
+body {
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+}
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 30px 0
+}
+#login {
+	padding: 125px 0 225px;
+	width: 50%;
+	margin: auto;
+}
+#login > * {
+	text-align: center;
+}
+#login h1{
+	margin-bottom: 20px;
+	color: #1D6154;
+	font-size: 30px;
+	font-weight: 700;
+}
+#login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+	margin: 2em 0 1em 0;
+}
+#login textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+input[type="submit"]{
+	width: 200px;
+}
+#forgot {
+	text-align: center;
+	text-decoration: underline;
+}
