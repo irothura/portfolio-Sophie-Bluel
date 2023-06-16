@@ -34,6 +34,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="../images/sophie-bluel.png" alt="">
+			<a class="fakeEditModeBtn"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -43,7 +44,10 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div id="projectsSection">
+			<h2 id="projectsTitle">Mes Projets</h2>
+			<a onclick="editionMode()" id="editModeBtn2"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
+		</div>
 		<div id="buttons">
 			<button id="filter-all" class="button">Tous</button>
 			<button id="filter-objects" class="button">Objets</button>
@@ -83,11 +87,15 @@
 				<h2>Ajout photo</h2>
 				<div id="uploadContent">
 					<div class="boxZone">
-						<div class="boxIcon"><i class="fa-regular fa-images"></i></div>
-						<img id="previewImage" src="">
-						<input id="boxDefaultBtn" type="file" hidden>
-						<button id="boxCustomBtn" onclick="boxDefaultBtnActive()">+ Ajouter photo</button>
-						<div class="boxText">jpg, png : 4mo max</div>
+						<div id="previewContainer">
+							<img src="#" id="previewImage">
+						</div>
+						<div id="waitingPreview">
+							<div class="boxIcon"><i class="fa-regular fa-images"></i></div>
+							<input id="boxDefaultBtn" type="file" hidden>
+							<button id="boxCustomBtn" onclick="boxDefaultBtnActive()">+ Ajouter photo</button>
+							<div class="boxText">jpg, png : 4mo max</div>
+						</div>
 					</div>
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="inputTitle">
