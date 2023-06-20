@@ -4,6 +4,7 @@ const editPanelContent = document.querySelector("#items2");
 const editModeButton = document.querySelector("#editmodeBtn");
 const closeButton = document.querySelector(".closeBtn");
 const editionPanel = document.querySelector("#editionPanel");
+const uploadPanel = document.querySelector("#uploadPanel");
 const defaultBoxBtn = document.querySelector("#boxDefaultBtn");
 const customBoxBtn = document.querySelector("#boxCustomBtn");
 const titleInput = document.querySelector('#inputTitle');
@@ -31,11 +32,9 @@ async function addItem(event) {
         });
   
         if (response.ok) {
-            // Ajout réussi, mettre à jour l'affichage des éléments
             await showItemsInEditionPanel();
             await showAllItems();
         } else {
-            // Affichage des erreurs en cas d'échec de l'ajout
             console.error('Erreur lors de l\'ajout de l\'élément.');
         }
     } catch (error) {
@@ -56,11 +55,9 @@ async function removeItem(event) {
         });
   
         if (response.ok) {
-            // Suppression réussie, mettre à jour l'affichage des éléments
             await showItemsInEditionPanel();
             await showAllItems();
         } else {
-            // Affihcage des erreurs en cas d'échec de la suppression
             console.error('Erreur lors de la suppression de l\'élément.');
         }
     } catch (error) {
@@ -76,20 +73,17 @@ async function checkLoggedIn() {
     const modifyOptions = document.getElementById('editModeBtn2');
     
     if (token) {
-      // L'utilisateur est connecté
       userHeader.style.display = 'flex';
-      logoutBtn.style.display = 'block';  // Afficher le bouton "Logout"
-      loginBtn.style.display = 'none';  // Masquer le bouton "Login"
+      logoutBtn.style.display = 'block';
+      loginBtn.style.display = 'none';
       modifyOptions.style.display = 'block';
     } else {
-      // L'utilisateur n'est pas connecté
       userHeader.style.display = 'none';
-      logoutBtn.style.display = 'none';  // Masquer le bouton "Logout"
+      logoutBtn.style.display = 'none';
       modifyOptions.style.display = 'none';
     }
 }
 
-// Affiche les items dans la div "items"
 async function showItems(items) {
     itemsContainer.innerHTML = items.map((item) => {
         return `
@@ -101,7 +95,6 @@ async function showItems(items) {
     }).join("");
 }
 
-// Affiche les items dans la div "items2"
 async function showItems2(items) {
     editPanelContent.innerHTML = items.map((item) => {
         return `
@@ -130,8 +123,7 @@ async function checkFields() {
     }
 }
 
-// Active le bouton spécifié et désactive les autres boutons
-function activateButton(button) {
+async function activateButton(button) {
     const buttons = document.querySelectorAll(".button");
     buttons.forEach((otherButton) => {
         if (otherButton === button) {
@@ -156,7 +148,6 @@ async function updateImageURL() {
     }
 }
 
-// Récupère les items de l'API
 async function getItems(endpoint = ENDPOINT) {
     const response = await fetch(endpoint);
     const data = await response.json();
@@ -164,20 +155,17 @@ async function getItems(endpoint = ENDPOINT) {
     return data;
 }
 
-// Affiche tous les items
 async function showAllItems() {
     const items = await getItems();
     await showItems(items);
 }
 
-// Filtre les items par catégorie
 async function filterItemsByCategory(categoryId) {
     const items = await getItems();
     const filteredItems = items.filter((item) => item.category.id === categoryId);
     await showItems(filteredItems);
 }
 
-// EventListener pour les boutons pour déterminer lequel est actif
 const buttons = document.querySelectorAll(".button");
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -224,6 +212,15 @@ async function uploadGo() {
     addItem();
 }
 
+window.onclick = (event) => {
+    if (event.target === editionPanel) {
+        closeEditionMode();
+    }
+    if (event.target === uploadPanel) {
+        closeUploadMode();
+        closeEditionMode();
+    }
+}
 
 defaultBoxBtn.addEventListener('input', checkFields);
 titleInput.addEventListener('input', checkFields);
